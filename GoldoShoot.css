@@ -1,0 +1,352 @@
+
+html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#body {
+	background-color: #111111;
+    margin: 0 !important;
+    padding: 0 !important;
+	overflow: hidden;
+	background-image : url("./Images/Cover.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	font-family : Comic Sans MS;
+}
+
+#Canvas {
+	overflow: hidden;
+	background-color: #000000;
+	cursor: none;
+	border: 1px solid #d3d3d3;
+	display: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;	
+}
+
+#Console {
+	background-color: #444444;
+	margin: 5px;
+	padding: 5px;
+	color: #AAAAAA;
+	height: 200px;
+}
+
+.DivModal {
+	z-index: 3;
+	display: none;
+	padding-top: 50px;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.4);
+}
+
+.noSelect {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;	
+}
+
+.BoxStartGame, .BoxLoading, .BoxGameScore {
+	top: 30px;
+	margin: auto;
+	position: relative;
+	padding: 0;
+	outline: 0;
+	width: 793px;
+	height: 758px;
+	background-image: url("./Images/Banner.png");
+	border-radius: 10px;
+}
+
+.BoxLoading {
+	top: 300px;
+	width: 793px;
+	height: 244px;	
+	background-image: url("./Images/BannerLoading.png");
+}
+
+
+.BoxEntities, .BoxCredit, .BoxGameInfo {
+	top: 50px;
+	margin: auto;
+	position: relative;
+	padding: 0;
+	outline: 0;
+	width: 793px;
+	background-color: #666666;
+	background: rgba(0, 0, 0, 0.4);
+	overflow: auto;
+	height: 500px;	
+}
+
+.BoxEntities {
+	height: 650px;	
+}
+
+.BoxCredit, .BoxGameInfo {
+	width: 90%;
+	height: 700px;
+}
+
+
+.Zoom {
+	animation: animatezoom 0.6s;
+}@keyframes animatezoom{from{transform:scale(0)}}
+
+
+.w3-btn,.w3-button {
+	border: none;
+	display: inline-block;
+	padding: 8px 16px;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	text-align: center;
+	cursor: pointer;
+	white-space: nowrap
+}
+
+.DivGoldoShootTitle {
+	font-family: Comic Sans MS;
+	text-align: right;
+	color: #FFFFFF;
+	text-shadow: 5px 5px #555555;
+	padding-right: 100px;
+	top: 50px;
+	position: relative;
+	width: 400px;
+	margin-left: auto; 
+	margin-right: 0;
+}
+
+#table {display: table;}
+.row {display: table-row;}
+
+.cellimage {
+	display: table-cell;
+	text-align: center;
+	min-width: 220px;
+	vertical-align: middle;
+}	
+
+.cellimage img {
+	max-width: 100px;
+}
+
+
+.cellbase, .cellhit, .cellpts, .EntityTitle, .cellCredit, .cellInfo  {
+	display: table-cell;
+	color: #AAAAAA;
+	vertical-align: middle;
+	user-select: none;
+	font-size: 30px;
+	font-family: Comic Sans MS;	
+}
+
+.cellCredit, .cellInfo {
+	font-size: 22px;
+}
+
+.cellInfo p {
+	margin-left:20px;
+}
+
+
+.cellbase hr {
+  border-color: #888888;
+  box-shadow: 2px 2px 0px #AAAAAA;
+}                              
+
+.cellhit { min-width: 300px;}
+.cellpts { min-width: 250px;}
+
+#idEntityListTitle, #idCrediTitle, #idGameInfoTitle {
+	font-size: 30px;
+	text-align: center;
+	color: #AAAAAA;
+}
+
+#idDivEntityList, #idDivCredit, #idDivGameInfo {
+	margin-left: auto;
+	margin-right: auto;
+	height: 800px;
+	width: 900px;
+	background-color: rgba(0, 0, 0, 0.4);
+
+
+  scrollbar-color: rgba(100,100,100, 0.6) rgba(0, 0, 0, 0.6);
+  scrollbar-width: thin;
+  
+  	border: 1px solid silver;
+	border-radius:5px;
+
+
+}
+
+
+
+
+#idDivCredit, #idDivGameInfo {
+	height: 900px;
+	width: 80%;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+
+#StartBtn {
+	position: absolute;
+	width: 250px;
+	height: 80px;
+	cursor: pointer;
+	font-size: 2rem;
+	border-radius: 5px;
+	background-color: transparent;
+	top: 130px;
+	left: 260px;
+	border-color: #EEEEEE #999999;
+}
+
+.ExitBtn {
+	font-weight: bold;
+	border-color: #EEEEEE #999999;
+}
+
+#idDivOptionButton {
+	background-color: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+	position: absolute;
+	width: 350px;
+	height: 400px;
+	cursor: pointer;
+	font-size: 16px;
+	top: 380px;
+	left: 900px;
+	color: #AAAAAA;
+	text-align: center;
+}
+
+.OptionButton {
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	background-color: transparent;
+	color: #EFEFEF;
+	width: 250px;
+	align: center;
+	margin : 10px;
+	height: 40px;
+	font-family: Comic Sans MS;
+	border-color: #EEEEEE #999999;
+}
+
+.ImgGoldoStandUp {
+	position: absolute;
+	height: 600px;
+	margin-left: -250px;
+	// margin-top: -300px;
+	margin-top: -440px;
+}
+
+.ImgDukeStandUp {
+	position: absolute;
+	height: 600px;
+	margin-left: 450px;
+	// margin-top: -320px;
+	margin-top: -460px;
+}
+
+.BoxGameScore {
+	top: 150px;
+	width: 600px;
+	height: 500px;	
+	background-image: none;
+	background-color: rgba(0,0,0,0.4);
+}
+
+#idEndGameScoreExitBtn {
+	font-family: Comic Sans MS;
+	position: absolute;
+	width: 200px;
+	height: 60px;
+	cursor: pointer;
+	font-size: 2rem;
+	border-radius: 5px;
+	background-color: transparent;
+	top: 400px;
+	left: 200px;
+	color: #EFEFEF;
+	border-color: #EEEEEE #999999;
+}
+
+.BoxGameScore div {
+	font-family: Comic Sans MS;
+	font-size: 50px;
+	color: #EFEFEF;
+	margin-top: 30px;
+	text-align : center;
+	align: center;
+}
+
+#iTextTour, #iTextClick, #iTextTemps{
+	font-size: 30px;
+}
+
+.ImgPuceInfo, .ImgPuceInfo02, .ImgPuceInfoTitle {
+	height:24px;
+	margin-right:10px;
+	margin-left:20px;
+	vertical-align: middle;
+}
+
+.ImgPuceInfoTitle {
+	margin-left:100px;
+}
+
+.ImgPuceInfo02 {
+	height:48px;
+}
+
+
+.ImgTitle {
+	height:48px;
+	margin-right:10px;
+	margin-left:10px;
+	vertical-align: middle;
+}
+
+
+
+.DisplaySetting  {
+   animation-duration: .8s;
+   animation-name: clignoter;
+   animation-iteration-count: infinite;
+   transition: none;
+   font-size: 22px;
+   width:95%;
+   // background-color:#0000FF
+}
+@keyframes clignoter {
+  0%   { opacity:1; }
+  40%   {opacity:0; }
+  100% { opacity:1; }
+}
+
+.DisplaySettingPuceInfo {
+	vertical-align: middle;
+}

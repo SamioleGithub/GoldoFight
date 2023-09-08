@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+	<!-- <script type="text/javascript" src="jquery.js"></script> -->
+
+    <script type="text/javascript" src="./Js/ChainedList.js"></script>
+    <script type="text/javascript" src="./Js/QuadScape.js"></script>
+    <script type="text/javascript" src="./Js/Collision.js"></script>
+    <script type="text/javascript" src="./Js/QuadTree.js"></script>
+    <script type="text/javascript" src="./Js/LoadManager.js"></script>
+    <script type="text/javascript" src="./Js/GoldoEntities.js"></script>
+    <script type="text/javascript" src="./Js/Other.js"></script>
+    <script type="text/javascript" src="./Js/GoldoShoot.js"></script>
+	<link rel="stylesheet" href="GoldoShoot.css">
+
+
+
+  </head>
+
+
+	<body id="body">
+	
+		<canvas id="Canvas" width="1024" height="1024">
+		<!-- <canvas id="Canvas"> -->
+		Your browser does not support the HTML5 canvas tag.
+		</canvas>	
+		
+		<div class="DivGoldoShootTitle">
+			<h1>Goldo Fight</h1>
+			<h3>Un Shoot 'em up sur le th&egrave;me de Goldorak
+			<br>Par Samuel Cantin</h3>
+			<hr>
+			<h3>Exclusivement sur ordinateur<br>
+			Ne fonctionne pas sur t&eacute;l&eacute;phone</h3>
+			<hr>
+			<h3>
+				Je ne prendrais pas en compte<br>
+				les demandes de correction.<br>
+				Ce petit jeux a &eacute;t&eacute; d&eacute;velopp&eacute;,<br>
+				uniquement pour le fun &#x1F609<br>
+			<h3>
+		</div>
+
+
+		<div id="idMsgboxLoading" class="DivModal">
+			<div class="BoxLoading Zoom">
+			</div>
+		</div>
+
+		<div id="idMsgboxStartGame" class="DivModal">
+			<div id="IdStartGame" class="BoxStartGame Zoom">
+				<button id="StartBtn"></button>
+				<div id="idDivOptionButton">
+				<button id="idEntityListBtn" class="OptionButton">Liste des entit&eacute;s</button>
+				<button id="idEndGameScoreBtn" class="OptionButton">Score</button>
+				<button id="idGameInfoBtn" class="OptionButton">Informations</button>
+				<button id="idCreditBtn" class="OptionButton">Cr&eacute;dits</button>
+				<div style="margin-left:auto;margin-right:auto;width:200px">
+				<div style="text-align:left"><INPUT id="idNoSoundTrack" type="checkbox" name="NoSoundTrack" checked>&nbsp;Jouer avec la musique</div>
+				</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="IdEndGameScore" class="DivModal noSelect">
+			<div class="BoxGameScore Zoom">
+				<button id="idEndGameScoreExitBtn">Retour</button>
+				<div>Votre Score</div>
+				<div id="iTextScore"></div>
+				<div id="iTextTour"></div>
+				<div id="iTextClick"></div>
+				<div id="iTextTemps"></div>
+				<img class="ImgDukeStandUp" src="Images/ActarusDebout.png">
+				<img class="ImgGoldoStandUp" src="Images/GoldoDebout.png">
+			</div>
+			<input id="hidden_Start_Intro" type="hidden" value="0">
+		</div>
+
+
+		<div id="idGameInfo" class="DivModal noSelect">
+			<div id="idDivGameInfo">
+				<button id="idGameInfoExitBtn" class="ExitBtn">X</button>
+				<div id="idGameInfoTitle" style="position:relative">
+					<img src="Images/Goldo.png" class="ImgTitle"/>
+					Informations
+					<img src="Images/Goldo.png" class="ImgTitle"/>
+				</div>
+				<div class="BoxGameInfo Zoom" style="border-radius:5px">
+					<div id="table">
+					   
+					   <div class="row">
+					   <div class="cellInfo">
+					   <p><img src="Images/DeltaLame.png" class="ImgPuceInfoTitle"/><u><b>A propos du jeu</b></u> : version 1.1
+					   
+					   <br><br><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Le propos</b>
+					   <br>Ce jeu a été développé absolument pour le fun sans cahier des charges et totalement de manière autodidacte.
+					   <br>N'étant pas rémunéré pour ça je ne ferais pas de modifications à la demande, que ce soit de l'évolution ou de la correction de bug.
+
+					   <br><br><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Le jeu et la série</b>
+					   <br>Pour les puristes, ce jeux n'a pas vocation de plaquer à la série. Il manque des armes, Goldorak reste dans sa soucoupe etc ... C'est avant tout un shoot'em up sans scénario. <b>"On est juste là pour tout dégommer"</b>.
+					   <br>Ne cherchez pas non plus une logique chronologique dans le déroulement des séquences et certains éléments du jeux sont des trucs que j'ai inventé.
+					   <br>C'était ça et vous le distribuer pour Noel 2021 ou pour dans deux ans.🤣
+					   </p><hr>
+
+					   <p><img src="Images/DeltaLame.png" class="ImgPuceInfoTitle"/><u><b>Infos et conseils jeux</b></u>
+					   
+					   <br><br><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Contrôle</b>
+					   
+					   <br><br>° Click gauche pour tirer
+					   <br>° Touche CTRL  - Planitrons
+					   <br>° Barre d'espace - Cornofulgure
+					   <br>° X - Fulguropoing et <b>? et ; pour les gauchers.</b>
+					   <br>° P - Pause
+					   <br>° Echap - pour sortir de la partie encours.
+					   					   
+					   <br><br><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Bonus et divers ...</b>
+					   <br><br><img src="Images/BonusMegaMach.png" class="ImgPuceInfo02"/><b>Le Méga Mach</b>
+					   <br>Il vous sert de bouclier d'énergie. Par rapport à la série sa fonction a été devoyée mais on s'en fou.
+					   <br>Il ne vous rend pas totalement invulnérable. il vous protège des lazer et des missils mais pas des collisions avec les entités.
+					   <br>Evitez de le prendre pendant une phase de tourelles.
+					   
+
+					   <br><br><img src="Images/BonusMegavolt.png" class="ImgPuceInfo02"/><b>Le Méga Volt</b>
+					   <br>Il est limité dans le temps, pour l'avoir de nouveau il faut prendre un nouveau bonus.
+					   <br>Je vous le conseille contre les tourelles, le seul truc c'est que vous ête obligé de vous approcher d'elles.
+
+					   <br><br><img src="Images/BonusCorneAuFulgure.png" class="ImgPuceInfo02"/><b>Le Cornofulgure</b>
+					   <br>Attention c'est une denrée rare à ne pas gaspiller.
+					   <br>Essayez de le garder pour les boss
+
+
+					   <br><br>
+					   <img src="Images/BonusAlcorak.png" class="ImgPuceInfo02"/>
+					   <img src="Images/BonusVenusiak.png" class="ImgPuceInfo02"/>
+					   <img src="Images/BonusFossoirak.png" class="ImgPuceInfo02"/><b>Les aides de camps</b>
+					   <br>Ils ont tous 3 vies et vous protègent aussi contre d'éventuelles collisions. Le pauvre Alcor en prend plein la tête !!
+					   <br>Quand ils perdent totalement leur vie il faut reprendre un bonus pour les avoir de nouveaux.
+					   <br>Au fur et à mesure que vous prenez des bonus du même type, leur tir s'améliore.
+					   <br>Si ils se font toucher, ils perdent une vie et leur tir regresse.
+
+					   <br><br>
+					   <img src="Images/BonusGlKgo.png" class="ImgPuceInfo02"/><b>Le bonus GlkGo</b>
+					   <br>Ce bonus traverse l'écran assez rapidement et c'est voulu.
+					   <br>Quand on l'attrape, on a accès immédiatement à un stage de points.
+
+					   <br><br>
+					   <img src="Images/BonusPlanitronExt.png" class="ImgPuceInfo02"/><b>Le bonus Goldorak le retour</b>
+					   <br>Ce bonus permet d'améliorer les planitrons, de base ils sont à tir directionnel.
+					   <br>Avec ce bonus ils deviennent des projectiles à tête chercheuse à durée limitée.
+
+					   <hr>
+
+					   
+					<p><img src="Images/DeltaLame.png" class="ImgPuceInfoTitle"/><u><b>Navigateurs, graphisme et autre ...</b></u>
+
+					   <p><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Les navigateurs</b>
+					   <br>J'ai principalement testé <b>Google Chrome</b> et <b>FireFox</b>.
+					   <br>Cette application ne fonctionne pas sur iPhone, SmartPhone et compagnie ...</p>
+					   
+					   <p><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Résolution graphique</b>
+					   <br>Résolution graphique minimale <b>1920 * 1080</b>.
+					   <br>Si vous jouez avec une résolution inférieur vous risquez d'avoir des surprises.</p>
+					   
+					   <p><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Redimentionnement du texte</b>
+					   <br>Ce jeux ne prend pas en compte le redimensionnement du text du système d'exploitation.
+					   <br>Si vous jouez avec un redimentionnement supérieur à 100% vous risquez de ne pas visualiser toute la zone de jeux.</p>
+
+					   <p><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>F11 - Le plein écran</b>
+					   <br>Pour plus de confort il est pérérable de jouer en plein écran avec la touche <b>F11</b>.
+					   <br>Pour revenir au mode normal faites F11 à nouveau.</p>			   
+
+					   <p><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Les scores</b>
+					   <br>Les scores ne sont pas enregistrés.
+					   <br>Cette application est déployée sur une page perso toute simple sans interraction avec une base de données ou autre.</p><hr>
+
+					   <p><img src="Images/DeltaLame.png" class="ImgPuceInfoTitle"/><u><b>Pour les développeurs</b></u>
+					   
+					   <br><br><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>Le code source</b>
+					   <br>Le code de cette application est entièrement libre, les développeurs en herbe pourront en faire ce qu'ils veulent.
+					   <br>Juste un truc, comme disait Coluche <b>"On est toujours le con d'un autre"</b>, et comme je sais qu'en informatique on est toujours le mauvais développeur d'un autre, si le code source ne vous convient pas, si vous considérez qu'il ne répond pas à des normes ou à aucun pattern de dev ou je ne sais quoi encore, en bref si vous trouvez que ce code est de la merde alors faites donc comme dans l'infanterie ... Tirez-vous ailleurs !!!
+					   <br>Et je le répète, ce jeux a été developpé gratuitement et pour le fun, je ne suis donc pas ici pour me toucher la nouille ...
+					   </p>
+
+					   <p><img src="Images/Planitron02.png" class="ImgPuceInfo"/><b>La techno</b>
+					   <br>Développement réalisé en pure Javascript et programmation objet.
+					   <br>La surface de jeux est dessinée dans un élément de type Canvas.
+					   <br>Auncun moteur de jeux n'a été employé.
+					   <br>Le système de collision est un truc tout à fait perso à base de Quadtree, d'intersection de zones rectangulaires ou bien d'un segment et d'un cercle ou bien encore d'un cercle avec un autre cercle.</p>
+					   <p>
+					   <a href="./GoldoFigth.zip">GoldoFight source code</a>
+					   <a href="http://localhost/GoldoShoot/GoldoFigth.zip">Download ZIP</a>
+					   </p>
+					   </div></div>
+					   
+					</div>
+				</div>
+			</div>
+		</div>	
+
+
+
+		
+		<div id="idCreditPage" class="DivModal noSelect">
+			<div id="idDivCredit">
+			<button id="idCreditExitBtn" class="ExitBtn">X</button>
+			<div id="idCrediTitle" style="position:relative">
+				<img src="Images/Goldo.png" class="ImgTitle"/>
+				Crédits et amis
+				<img src="Images/Goldo.png" class="ImgTitle"/>
+			</div>
+				<div class="BoxCredit Zoom" style="border-radius:5px">
+					<div id="table">
+					   <div class="row">
+						  <div class="cellimage"><img src="Images/CreditSam.jpg" alt="Sam"></div>
+						  <div class="cellCredit">
+						  <p>
+							  <a href="https://www.youtube.com/channel/UC2MrOGQA1cyvVlMiL8RXeuQ" target="_blank">
+							  <img src="Images/LogoYoutube.png" /></a> <b>Samuel Cantin</b> (développeur du jeu)
+							  <br>Né sur les bords de la Baltique en 1928, Sam commença ses études en informatique à l'université de Cambridge dans le Minnesota situé à une trentaine de kilomètres au nord de Pékin. Il fait ensuite une grande carrière dans le Rock'n Roll 🤘 comme guitariste héros 🎸 et continue en parallèle ses activités de guerrier 🗡 à Berry Champ de Bataille. Passionné de courges 🎃, il laisse tomber l'informatique pour devenir Maraîcher.
+							  <br>Vous trouverez absolument tout ce qu'il faut savoir sur sa chaine youtube hé hé.
+						  </p>
+						  <hr>
+						  </div>
+					   </div>
+
+
+
+					   <div class="row">
+						  <div class="cellimage">
+						  <img src="Images/CreditTobal.png" alt="Kris Tobal"><br>
+						  <img src="Images/CreditTobal02.jpg" alt="Kris Tobal">
+						  </div>
+						  <div class="cellCredit">
+						  <p>
+							  <a href="https://www.facebook.com/kris.tobal.9862" target="_blank">
+							  <img src="Images/LogoFacebook.png" /></a> <b>Kris Tobal</b>
+							  <br>Kris réalise ses propres modélisations et impression 3D sur le thème de Goldorak et autres ...<br>
+							  Grâce à Kris j'ai pu ajouter et animer les antéraks de <b>Gin Gin</b> et <b>Gon Gon</b> ainsi que le <b>Golgoth 27</b>, dans le jeux à partir des screenshot de ses modèles 3D. Kris est venu me proposer ses services sans que je lui demande et je l'en remercie car son aide m'a été très précieuse.
+						  </p>
+						  <hr>
+						  </div>
+					   </div>
+
+					   <div class="row">
+						  <div class="cellimage">
+						  <img src="Images/CreditFenom.jpg" alt="Fenom">
+						  </div>
+						  <div class="cellCredit">
+						  <p>
+							  <a href="https://www.instagram.com/fenom.pntg/" target="_blank">
+							  <img src="Images/LogoInstagram.png" /></a> <b>Fenom</b>
+							  <br>Fenom est un gars que j'ai connu sur les groupes de Goldorak.<br>
+							  Graphiste de passion, je lui ai demandé si il pouvait me donner un coup de main pour modifier l'image du <b>Golgoth 40</b> et <b>Golgoth 28</b> afin de leur donner un peu plus de relief, Fenom a accépté et je l'en remercie.
+							  <br>Allez jeter un coup d'oeil sur le lien Instagram vous verrez c'est de la bombe 🤘.
+						  </p>
+						  <hr>
+						  </div>
+					   </div>
+
+					   <div class="row">
+						  <div class="cellimage"><img src="Images/CreditXavier.jpg" alt="Xavier Xav"></div>
+						  <div class="cellCredit">
+						  <p><a href="https://www.facebook.com/groups/684870271526096" target="_blank"><img src="Images/Badge.png" /></a> <b>Xavier Xav</b>
+						  <br>Xavier est un gars super sympa qui aime le Rock'n Roll et le métal 🤘🤘🤘 et dont j'ai fait la connaissance sur le groupe Goldorak le Retour.<br>
+						  Il m'a aidé à tester le jeux, réagencer les séquences et au passage, il a fait péter le score à plus de 250000 points hé hé &#128517;
+						  <br>Xavier m'a tanné le cuir chevelu bien comme il faut avec le Fulguropoing hé hé.
+						  <br>"Hey Sam tu nous fais le Fulgurpoing ? hein Sam ?", finalement il avait raison le bougre.
+						  </p>
+						  <hr>
+						  </div>
+					   </div>
+
+					   <div class="row">
+						  <div class="cellimage"><img src="Images/CreditSimon.png" alt="Simon Wright"></div>
+						  <div class="cellCredit">
+						  <p><a href="https://www.facebook.com/groups/684870271526096" target="_blank"><img src="Images/Badge.png" /></a> <b>Simon Wright</b>
+						  <br>Simon est un administrateur du groupe Goldorak le Retour</a><br>
+						  Tout pareil que Xavier c'est un gars super sympa qui m'a aidé à tester le jeux.<br>
+						  Simon est un fou furieux des cellulos sur Goldorak mais pas seulement.
+						  <br><b>Le nom du jeux a été trouvé par le fiston de Simon: GoldoFight !!</b>
+						  </p><hr>
+						  </div>
+					   </div>
+
+					   <div class="row">
+						  <div class="cellimage"><img src="Images/CreditGlkgo.jpg" alt="GlkGo" style="max-width:125px"></div>
+						  <div class="cellCredit">
+						  <p>
+						  <a href="https://www.facebook.com/GlkGolapage" target="_blank">
+						  <img src="Images/LogoFacebook.png"/></a>
+						  <a href="https://www.youtube.com/user/dtc89moi" target="_blank">
+						  <img src="Images/LogoYoutube.png"/></a> <b>GlKgo</b>
+						  <br>Qui ne connais pas GlkGo ? Il est notre mentor à tous hé hé 😉<br>
+						  GlkGo est un gars que j'ai connu par l'intermédiaire de sa chaine youtube sur laquelle il réalisait des vidéos de unboxing sur des figurines de Goldorak. Depuis il a su réunir une large communauté et nous échangeons assez souvent dans des live qu'il organise et dans lesquels on se marre bien.
+						  <br>Je remercie GlkGo pour m'avoir prêté sa lucarne au travers de laquelle j'ai pu présenter le jeux et ainsi officialiser sa distribution. Ce fut un enregistrement fort fort sympatique comme je les aime et dans lesquels on se marre bien.</p><hr>
+						  </div>
+					   </div>
+					   
+					   
+					   
+					   <div class="row">
+						  <div class="cellimage"><img src="Images/CreditSylvain.png" alt="Sylvain Boiteau"></div>
+						  <div class="cellCredit">
+						  <p><a href="https://www.facebook.com/Sylsculptures" target="_blank">
+						  <img src="Images/LogoFacebook.png"/></a> <b>Sylvain Boiteau</b>
+						  <br><b>Pour la petite histoire</b>, Je lui avait empreinté un de ses dessins pour réaliser une petite vidéo rigolotte sur Goldorak. <a href="https://www.youtube.com/watch?v=wxsDFswauA0" target="_blank"><img src="Images/LogoYoutube.png" alt="Goldorak Go" /></a> Mais je l'avais fait sans lui demander la permission.
+						  <br>Sylvain m'a donné l'autorisation d'employer son dessin de bon coeur et j'étais super content.
+						  <br>Alors j'ai remis le couvert hé hé 😉 et je lui ai demandé si il pouvait me prêter une image pour le jeux.
+						  <br>Il m'a envoyé le superbe Goldorak qu'il a réalisé et qui est montré pendant l'affichage du titre de l'épisode <b>Ad Victoriam</b>
+						  <br>Merci à toi Sylvain, c'est un plaisir d'échanger avec des mecs comme toi.
+						  <br>Allez jeter un coup d'oeil sur sa page Facebook.
+						  </p><hr>
+						  </div>
+					   </div>
+					   
+					   
+					   <div class="row">
+						  <div class="cellimage"><img src="Images/CreditMerci.png" alt="Et aussi ..."></div>
+						  <div class="cellCredit">
+						  <p>
+						  <b>Et merci aussi ...</b>
+						  <ul>
+							  
+							  <p><a href="https://www.facebook.com/FrancorakGo/" target="_blank"><img src="Images/LogoFacebook.png"alt="Francorak Go" /></a> <b><u>Carole Guren Daizä</u></b>
+							  <br>Carole est une personne que j'ai connu par l'intermédiaire de GlkGo
+							  <br>Elle m'a aider à retrouver les voix du Grand Stratégaire. Merci pour ton aide Carole !!!</p>
+
+							  
+							  <p><a href="https://www.youtube.com/channel/UC8Dksihs74f2HRlnXEHC4hQ" target="_blank"><img src="Images/LogoYoutube.png"alt="Fuma Project" /></a> <b><u>Denis Fumas</u></b>, pour les sprite de son Golorak que j'ai pu réemployer pour le Fulguropoing</p>
+							  
+							  <p><a href="https://www.facebook.com/groups/684870271526096" target="_blank"><img src="Images/Badge.png" /></a> <b><u>Admin Goldorak Le Retour</u></b>, pour m'avoir proposé une collecte participative pour héberger le jeu sur un serveur avec base de données mais que j'ai dû décliné pour éviter d'avoir des soucis avec les droits d'auteur.</p>
+
+							  <p><b><u>Christoph Conrad</u></b>, pour m'avoir aidé à réaliser une transposition de fréquence sur les fichiers sonores afin d'obtenir les voix dans la bonne tonalité.</p>
+							  
+							  <p><b><u>Nathalie Courdier</u></b>, pour m'avoir dégoté le son du MégaMach.</p>
+
+							  <p><a href="https://www.facebook.com/Talouarn-PRODS-579562972231634" target="_blank"><img src="Images/LogoFacebook.png" /></a> <b><u>Marc Talouarn</u></b>, pour m'avoir soutenu en partageant pas mal de fois mes petites vidéos.</p>
+							  
+						  </ul>
+						  </div>
+					   </div>
+					</div>
+				</div>
+			</div>
+		</div>	
+
+		<div id="idEntityList" class="DivModal">
+			<div id="idDivEntityList">
+				<button id="idEntityListExitBtn" class="ExitBtn">X</button>
+				<div id="idEntityListTitle" style="position:relative">
+					<img src="Images/Goldo.png" class="ImgTitle"/>
+					Liste des entit&eacute;s
+					<img src="Images/Goldo.png" class="ImgTitle"/>
+				</div>
+				<div class="BoxEntities Zoom" style="border-radius:5px">
+					<div id="table">
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Navette01.png" alt="Navette 1"></span>
+						  <span class="cellhit">1 hit</span>
+						  <span class="cellpts">1 pt</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Navette02.png" alt="Navette 2"></span>
+						  <span class="cellhit">2 hit</span>
+						  <span class="cellpts">4 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Navette03.png" alt="Navette 3"></span>
+						  <span class="cellhit">3 hit</span>
+						  <span class="cellpts">6 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/NEW Navette02.png" alt="Navette Shield"></span>
+						  <span class="cellhit">30 hit</span>
+						  <span class="cellpts">35 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/NavetteCorpPique.png" alt="Navette Pique"></span>
+						  <span class="cellhit">30 hit</span>
+						  <span class="cellpts">40 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/NavetteMissil.png" alt="Navette Missil"></span>
+						  <span class="cellhit">15 hit</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/NavetteMissilRouge.png" alt="Navette Missil"></span>
+						  <span class="cellhit">15 hit</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/NavetteMissilNoire.png" alt="Navette Missil"></span>
+						  <span class="cellhit">15 hit</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+					   
+
+					   <div class="row">
+						  <span class="cellbase"><hr></span>
+						  <span class="cellbase"><hr></span>
+						  <span class="cellbase"><hr></span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Tourelle01.png" alt="Tourelle 01"></span>
+						  <span class="cellhit">20 hit</span>
+						  <span class="cellpts">25 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Tourelle02.png" alt="Tourelle 02"></span>
+						  <span class="cellhit">22 hit</span>
+						  <span class="cellpts">27 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Tourelle03.png" alt="Tourelle 03"></span>
+						  <span class="cellhit">25 hit</span>
+						  <span class="cellpts">30 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/TourelleMissil.png" alt="Tourelle Missil"></span>
+						  <span class="cellhit">20 hit</span>
+						  <span class="cellpts">25 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Missil01.png" alt="Missil"></span>
+						  <span class="cellhit">1 hit</span>
+						  <span class="cellpts">10 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Missil02.png" alt="Missil"></span>
+						  <span class="cellhit">1 hit</span>
+						  <span class="cellpts">15 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/SiloMissil.png" alt="Missil de silo"></span>
+						  <span class="cellhit">5 hit</span>
+						  <span class="cellpts">1000 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/SiloGui.png" alt="Silo"></span>
+						  <span class="cellhit">20 hit</span>
+						  <span class="cellpts">25 pts</span>
+					   </div>
+
+
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:150px"  src="Images/CyberMine.png" alt="Cyber Mine"></span>
+						  <span class="cellhit">15 hit</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:150px"  src="Images/Baricade.png" alt="Baricade"></span>
+						  <span class="cellhit">Indestructible</span>
+						  <span class="cellpts">0 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:150px"  src="Images/NavetteFoudre.png" alt="Navette de foudre"></span>
+						  <span class="cellhit">80 hit</span>
+						  <span class="cellpts">90 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellbase"><hr></span>
+						  <span class="cellbase"><hr></span>
+						  <span class="cellbase"><hr></span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/SoucoupeAmirale.png" alt="Soucoupe Amirale"></span>
+						  <span class="cellhit">650 hit</span>
+						  <span class="cellpts">700 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/MinosSoucoupeAmirale.png" alt="Soucoupe Amirale Minos"></span>
+						  <span class="cellhit">800 hit</span>
+						  <span class="cellpts">850 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/GoruGoru03.png" alt="Goru Goru"></span>
+						  <span class="cellhit">400 hit</span>
+						  <span class="cellpts">450 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Golgoth40.png" alt="Golgoth 40"></span>
+						  <span class="cellhit">500 hit</span>
+						  <span class="cellpts">550 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:200px" src="Images/Golgoth28.png" alt="Golgoth 28"></span>
+						  <span class="cellhit">600 hit</span>
+						  <span class="cellpts">650 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:120px" src="Images/MiniGinGin.png" alt="Gin Gin"></span>
+						  <span class="cellhit">700 hit</span>
+						  <span class="cellpts">850 pts</span>
+					   </div>
+					   
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:120px" src="Images/MiniGonGon.png" alt="Gon Gon Ergastul"></span>
+						  <span class="cellhit">800 hit</span>
+						  <span class="cellpts">1000 pts</span>
+					   </div>
+					   
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:120px" src="Images/MiniGolgoth27.png" alt="Golgoth 27">Golgoth 27</span>
+						  <span class="cellhit">550 hit</span>
+						  <span class="cellpts">700 pts</span>
+					   </div>
+					   
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:150px" src="Images/bonusBaseVega.png" alt="Base Vega"></span>
+						  <span class="cellhit">1000 min</span>
+						  <span class="cellpts">1000 min</span>
+					   </div>
+					   
+					   <div class="row">
+						  <span class="cellimage"><img style="max-width:150px"  src="Images/MiniSoucoupeImperiale.png" alt="Soucoupe Imperiale"></span>
+						  <span class="cellhit">2000 hit</span>
+						  <span class="cellpts">2600 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellbase"><hr></span>
+						  <span class="cellbase"><hr></span>
+						  <span class="cellbase"><hr></span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusOVTerre.png" alt="Bonus OVTerre"></span>
+						  <span class="cellhit">Bonus OVTerre</span>
+						  <span class="cellpts">40 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusAlcorak.png" alt="Bonus Alcorak"></span>
+						  <span class="cellhit">Bonus Alcorak</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusFossoirak.png" alt="Bonus Fossoirak"></span>
+						  <span class="cellhit">Bonus Fossoirak</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusVenusiak.png" alt="Bonus Venusiak"></span>
+						  <span class="cellhit">Bonus Venusiak</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/Bonus.png" alt="Bonus vie"></span>
+						  <span class="cellhit">Bonus vie</span>
+						  <span class="cellpts">5 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/PlanitronBonus.png" alt="Bonus Planitron"></span>
+						  <span class="cellhit">Bonus Planitron</span>
+						  <span class="cellpts">5 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusPlanitronExt.png" alt="Bonus Goldorak le retour"></span>
+						  <span class="cellhit">Bonus Goldorak le retour</span>
+						  <span class="cellpts">50 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusMegavolt.png" alt="Bonus Megavolt"></span>
+						  <span class="cellhit">Bonus Megavolt</span>
+						  <span class="cellpts">10 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusMegaMach.png" alt="Bonus MegaMach"></span>
+						  <span class="cellhit">Bonus MegaMach</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusCorneAuFulgure.png" alt="Bonus Cornofulgure"></span>
+						  <span class="cellhit">Bonus Cornofulgure</span>
+						  <span class="cellpts">20 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusFulguroPoing.png" alt="Bonus Fulguropoing"></span>
+						  <span class="cellhit">Bonus Fulguropoing</span>
+						  <span class="cellpts">30 pts</span>
+					   </div>
+
+					   <div class="row">
+						  <span class="cellimage"><img src="Images/BonusGlKgo.png" alt="Bonus GlkGo"></span>
+						  <span class="cellhit">Bonus GlkGo</span>
+						  <span class="cellpts">200 pts</span>
+					   </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+</html>
