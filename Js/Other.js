@@ -103,7 +103,7 @@ function SequenceManager ()
 		// ---------------------------------------------------------------------------
 
 		// Aujourd'hui Goldorak dans ...
-		// this.SequenceList.push (new SequenceToDay ());
+		this.SequenceList.push (new SequenceToDay ());
 
 		// Lance la musique
 		this.SequenceList.push (new SequenceStart ());
@@ -113,16 +113,16 @@ function SequenceManager ()
 		// ---------------------------------------------------------------------------
 		//		DEBUG
 		// ---------------------------------------------------------------------------
-		this.SequenceList.push (new SequenceGroundDecor (true));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFulguroPoing,10));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusAlcorak,25));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFossoirak,5));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusVenusiak,5));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusMegavolt,1));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.BonusPlanitronExt,1));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusCorneAuFulgure,20));
-		this.SequenceList.push (new SequenceTimeWaiting (4));
-		this.AddSequenceGolgoth (999);
+		// this.SequenceList.push (new SequenceGroundDecor (true));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFulguroPoing,10));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusAlcorak,25));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFossoirak,5));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusVenusiak,5));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusMegavolt,1));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.BonusPlanitronExt,1));
+		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusCorneAuFulgure,20));
+		// this.SequenceList.push (new SequenceTimeWaiting (4));
+		// this.AddSequenceGolgoth (999);
 		// this.AddSequenceGolgoth (SeqEnum.GoruGoru);
 
 
