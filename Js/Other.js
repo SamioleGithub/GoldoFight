@@ -52,49 +52,6 @@ function SequenceManager ()
 		if (this.SequenceList != null) delete this.SequenceList;
 		this.SequenceList = new Array ();
 
-		// ---------------------------------------------------------------------------
-		//
-		//		POUR TESTER DES SEQUENCE
-		//
-		// ---------------------------------------------------------------------------
-/*
-		this.SequenceList.push (new SequenceBonus (AppViewModel.BonusPlanitronExt,3));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusCorneAuFulgure,3));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusAlcorak,3));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusVenusiak,3));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFossoirak,3));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFulguroPoing,4));
-
-		this.SequenceList.push (new SequenceGroundDecor (false));
-		this.SequenceList.push (new SequenceMegamach (0));
-		this.SequenceList.push (this.FadingBack (2,BackImageCloud02,true));
-
-		this.SequenceList.push (new SequenceCloud (true));
-
-		this.SequenceList.push (new SequenceNavetteMissilEx (0,1,1,1,1));
-		this.SequenceList.push (new SequenceNavetteMissilEx (0,2,1,1,1));
-		this.SequenceList.push (new SequenceNavetteMissilEx (0,4,1,1,1));
-
-		var seqSound = new SequencePlaySound ('DeuxiemePhase',1,-1);
-		seqSound.AddImage ('PersoHydargos',100,100,0);
-		this.SequenceList.push (seqSound);
-
-
-		this.SequenceList.push (new SequenceCyberMine (8));
-		this.SequenceList.push (new SequenceWaitNoEntityList (animationListBack));
-
-	
-		this.SequenceList.push (this.FadingBack (2,BackImageCloud01,false));
-
-		this.SequenceList.push (new SequenceBonus (AppViewModel.BonusPlanitronExt,1));
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusCorneAuFulgure,1));
-
-		var seqSoundHyd = new SequencePlaySound ('HydargosPlusFort',1,-1);
-		seqSoundHyd.AddImage ('PersoHydargos',100,100,0);
-		this.SequenceList.push (seqSoundHyd);
-		this.SequenceList.push (new SequenceSoucoupeAmirale ());
-		this.SequenceList.push (new SequenceBonus (AppViewModel.bonusVie,1));
-*/
 
 		// ---------------------------------------------------------------------------
 		//
@@ -107,24 +64,6 @@ function SequenceManager ()
 
 		// Lance la musique
 		this.SequenceList.push (new SequenceStart ());
-
-
-
-		// ---------------------------------------------------------------------------
-		//		DEBUG
-		// ---------------------------------------------------------------------------
-		// this.SequenceList.push (new SequenceGroundDecor (true));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFulguroPoing,10));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusAlcorak,25));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusFossoirak,5));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusVenusiak,5));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusMegavolt,1));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.BonusPlanitronExt,1));
-		// this.SequenceList.push (new SequenceBonus (AppViewModel.bonusCorneAuFulgure,20));
-		// this.SequenceList.push (new SequenceTimeWaiting (4));
-		// this.AddSequenceGolgoth (999);
-		// this.AddSequenceGolgoth (SeqEnum.GoruGoru);
-
 
 
 		
